@@ -22,8 +22,8 @@ class ModelLoader(BaseModel):
     config: Optional[ConfigLoader] = Field(default=None, exclude=True)
 
     def model_post_init(self, __context: Any) -> None:
-        self.config = ConfigLoader()
-
+        if self.config is None:
+            self.config = ConfigLoader()
 
     class Config:
         arbitrary_types_allowed = True
