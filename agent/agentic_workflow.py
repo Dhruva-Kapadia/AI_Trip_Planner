@@ -12,19 +12,19 @@ from langgraph.prebuilt import ToolNode, tools_condition
 
 
 class GraphBuilder():
-    def __init__(self):
+    def __init__(self, model_provider: str = "groq"):
+        llm = ModelLoader(model_provider=model_provider).load_llm()
         self.tools = [
             # WeatherInfoTool(),
             # PlaceSearchTool(),
             # CurrencyConverterTool(),
             # ExpenseCalculatorTool()
         ]
-        self.syste_prompt = SYSTEM_PROMPT
+        self.system_prompt = SYSTEM_PROMPT
+        self.llm_with_tools = llm.bind_tools(self.tools)
 
     def agent_function(self, state:MessagesState):
-        """
-        Main agent function
-        """
+        """Main agent function"""
         user_question = state["messages"]
         input_question = [self.system_prompt] + user_question
         response = self.llm_with_tools.invoke(input_question)
@@ -43,4 +43,4 @@ class GraphBuilder():
 
 
     def __call__(self):
-        pass
+        return self.build_graph()
