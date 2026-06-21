@@ -12,15 +12,15 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-st.title()
+st.title("AI Trip Planner")
 
 # Initialize chat history in session state
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-st.header()
+st.header("How can I assist you with your travel plans today?")
 
-with st.form():
+with st.form(key="query_form", clear_on_submit=True):
     user_input=st.text_input("User Input", placeholder="Enter your travel query here...")
     submit_button = st.form_submit_button("Submit")
 
