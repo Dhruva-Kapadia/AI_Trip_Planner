@@ -1,9 +1,9 @@
 from utils.model_loader import ModelLoader
 
 from tools.weather_info_tool import WeatherInfoTool
-# from tools.place_search_tool import PlaceSearchTool
-# from tools.expense_calculator_tool import ExpenseCalculatorTool
-# from tools.currency_conversion_tool import CurrencyConverterTool
+from tools.place_search_tool import PlaceSearchTool
+from tools.expense_calculator_tool import ExpenseCalculatorTool
+from tools.currency_conversion_tool import CurrencyConverterTool
 
 from prompt_library.prompt import SYSTEM_PROMPT
 

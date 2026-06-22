@@ -5,7 +5,6 @@ from utils.weather_info import WeatherForecastTool
 from langchain.tools import tool
 
 class WeatherInfoTool:
-    
     def __init__(self):
         load_dotenv()
         self.api_key = os.environ.get("OPENWEATHERMAP_API_KEY")
