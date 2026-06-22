@@ -1,7 +1,7 @@
 import os
 from typing import List, Dict, Optional, Any
 from dotenv import load_dotenv
-# from utils.weather_info import WeatherForecastTool
+from utils.weather_info import WeatherForecastTool
 from langchain.tools import tool
 
 class WeatherInfoTool:
