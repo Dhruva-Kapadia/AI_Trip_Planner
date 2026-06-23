@@ -11,7 +11,7 @@ class WeatherInfoTool:
         self.weather_service = WeatherForecastTool(self.api_key)
         self.weather_tool_list = self._setup_tools()
 
-    def _setup_tool(self) -> List:
+    def _setup_tools(self) -> List:
         """Setup all tools for the weather forecast tool"""
         @tool
         def get_current_weather(city: str) -> str:

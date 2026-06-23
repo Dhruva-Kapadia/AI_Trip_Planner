@@ -11,7 +11,7 @@ class CurrencyConversionTool:
         self.currency_service = CurrencyConverter(self.api_key)
         self.currency_converter_tool_list = self._setup_tools()
 
-    def setup_tools(self):
+    def _setup_tools(self):
         """Setup all tools for the currency convertor tool"""
         @tool
         def convert_currency(amount: float, from_currency: str, to_currency: str):

@@ -2,8 +2,8 @@ from utils.model_loader import ModelLoader
 
 from tools.weather_info_tool import WeatherInfoTool
 from tools.place_search_tool import PlaceSearchTool
-from tools.expense_calculator_tool import ExpenseCalculatorTool
-from tools.currency_conversion_tool import CurrencyConverterTool
+from tools.expense_calculator_tool import CalculatorTool
+from tools.currency_conversion_tool import CurrencyConversionTool
 
 from prompt_library.prompt import SYSTEM_PROMPT
 
@@ -18,12 +18,12 @@ class GraphBuilder():
         self.tools = []
         self.weather_tools = WeatherInfoTool()
         self.place_search_tools = PlaceSearchTool()
-        self.currency_conversion_tools = CurrencyConverterTool()
-        self.calculator_tools = ExpenseCalculatorTool()
+        self.currency_conversion_tools = CurrencyConversionTool()
+        self.calculator_tools = CalculatorTool()
 
         self.tools.extend([*self.weather_tools.weather_tool_list, 
                            *self.place_search_tools.place_search_tool_list, 
-                           *self.currency_conversion_tools.currency_conversion_tool_list, 
+                           *self.currency_conversion_tools.currency_converter_tool_list, 
                            *self.calculator_tools.calculator_tool_list])
 
         self.llm_with_tools = self.llm.bind_tools(self.tools)
@@ -44,11 +44,11 @@ class GraphBuilder():
         graph_builder.add_node("agent", self.agent_function)
         graph_builder.add_node("tools", ToolNode(tools=self.tools))
         graph_builder.add_edge(START, "agent")
-        graph_builder.add_conditional_edge("agent", tools_condition)
+        graph_builder.add_conditional_edges("agent", tools_condition)
         graph_builder.add_edge("tools", "agent")
         graph_builder.add_edge("agent", END)
-        graph_builder.compile()
-        return graph_builder
+        self.graph = graph_builder.compile()
+        return self.graph
 
 
     def __call__(self):

@@ -1,10 +1,23 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from agent.agentic_workflow import GraphBuilder
 from fastapi.responses import JSONResponse
 import os
+from dotenv import load_dotenv
+from starlette.responses import JSONResponse
+from utils.save_to_document import save_document
+load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 class QueryRequest(BaseModel):
     query: str
